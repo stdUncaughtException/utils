@@ -29,9 +29,3 @@ Dentro de este cofre mágico encontrarás utilidades para los siguientes lenguaj
 4. Envía un **pull request** para que los maestros lo revisen.
 
 Antes de lanzar tu hechizo, asegúrate de que tu magia siga el formato y estilo de este libro encantado. ¡Así, las fuerzas del caos no romperán el equilibrio!
-
----
-
-## 📜 Licencia
-
-Este grimorio está protegido bajo la [Licencia MIT](LICENSE), lo que te concede la libertad de usar sus hechizos y encantamientos, siempre y cuando honres al autor original de la magia. ¡Usa este poder con sabiduría!

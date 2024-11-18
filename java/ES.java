@@ -1,6 +1,10 @@
-package utilidadees;
+package utilidades;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Esta clase define algunos métodos para entrada de datos, de forma que se
@@ -13,7 +17,7 @@ import java.util.Scanner;
  * para lee enteros, que se llaman todos igual, pero que se diferencian en su
  * lista de parámetros.
  *
- * @author ________________________
+ * @author _________________________________________
  */
 public class ES {
 
@@ -547,6 +551,7 @@ public class ES {
     public static float leeReal(float minimo, float maximo) {
         float numero = 0;
         boolean leido = false;
+        @SuppressWarnings("UnusedAssignment")
         Scanner teclado = null;
         // Si el valor mínimo es mayor que el máximo, lanzamos una excepción
         if (minimo <= maximo) {
@@ -589,6 +594,7 @@ public class ES {
     public static float leeReal(String mensaje, float minimo, float maximo) {
         float numero = 0;
         boolean leido = false;
+        @SuppressWarnings("UnusedAssignment")
         Scanner teclado = null;
         // Si el valor mínimo es mayor que el máximo, lanzamos una excepción
         if (minimo <= maximo) {
@@ -817,9 +823,11 @@ public class ES {
      * @return la cadena "S" si se ha respondido "S" o "s" y la cadena "N" si se
      * ha respondido "N" o "n".
      */
+    @SuppressWarnings("null")
     public static String leeRespuesta(String mensaje) {
         boolean correcta = false;
         String cadena = "";
+        @SuppressWarnings("UnusedAssignment")
         Scanner teclado = null;
         do {
             ES.msgln(mensaje);
@@ -838,7 +846,7 @@ public class ES {
         return cadena.toUpperCase();
     }
 
-      /**
+    /**
      * Este método se encarga de realizar un ciclo de preguntas al usuario y
      * recoger sus respuestas. Para cada pregunta, el método valida la entrada y
      * permite al usuario detener el proceso introduciendo la palabra "fin". Las
@@ -907,5 +915,71 @@ public class ES {
         return continuar ? data : null;
     }
 
-  
+    /**
+     * Método que permite introducir datos en un arreglo bidimensional mediante
+     * cuadros de diálogo.
+     *
+     * @param kV Un arreglo bidimensional de cadenas donde se almacenarán los
+     * datos introducidos por el usuario. Se espera que cada fila tenga al menos
+     * dos columnas: la primera columna contiene un identificador para el dato a
+     * introducir, y la segunda columna se usará para almacenar el dato
+     * ingresado por el usuario. Había pensado en hacerlo con Map, pero pienso
+     * que es más rápido y fácil de usar con un arreglo bidimensional.
+     *
+     * @return El mismo arreglo bidimensional 'seses', pero con los datos
+     * introducidos por el usuario en la segunda columna.
+     */
+    public static String[][] introducirDatosDialog(String[][] kV) {
+
+        /*
+        Se solicitarán tantos datos a introducir como el largo de la
+        primera dimensión.
+         */
+        for (String[] kV1 : kV) {
+            /*
+            El dato solicitado se almacenará en la segunda posición del
+            arreglo, de forma que el arreglo quedaría de manera muy
+            similar a como funciona un diccionario K-V:
+            ------------------------------------------------
+            Ejemplo:
+            seses[0][0] = "nombre"      |   seses[0][1] = "Zelmar"
+            seses[1][0] = "apellidos"   |   seses[1][1] = "Ramilo"
+            seses[2][0] = "sexo"        |   seses[2][1] = "Hombre"
+            seses[3][0] = "ojos"        |   seses[3][1] = "2"
+            Extra:
+            Se puede establecer el valor inicial del input agregando
+            en la segunda dimension del arreglo un valor. Este aparecerá
+            en el cuadro de dialogo como input predeterminado.
+             */
+            kV1[1] = JOptionPane.showInputDialog("Insertar " + kV1[0], kV1[1]);
+        }
+        return kV; // Regreso el arreglo K-V
+    }
+
+    /**
+     * Clase para contener métodos de validación.
+     *
+     * @author José Javier Bermúdez Hernández
+     */
+    public class Validar {
+
+        /**
+         * Comprueba si la fecha que se envía como parámetro es válida.
+         *
+         * @param fecha Fecha que se recibe como parámetro en formato cadena de
+         * caracteres.
+         * @return true si la fecha es válida o false sin no es válida.
+         */
+        public static boolean isFechaValida(String fecha) {
+            try {
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy",
+                        Locale.getDefault());
+                formatoFecha.setLenient(false);
+                formatoFecha.parse(fecha);
+            } catch (ParseException e) {
+                return false;
+            }
+            return true;
+        }
+    }
 }//class ES
